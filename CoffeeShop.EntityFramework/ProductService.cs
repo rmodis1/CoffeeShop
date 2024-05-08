@@ -7,8 +7,10 @@ namespace CoffeeShop.EntityFramework
 	{
 		internal static void InsertProduct()
 		{
-            string name = AnsiConsole.Ask<string>("Product's name:");
-            ProductController.AddProduct(name);
+			var product = new Product();
+            product.Name = AnsiConsole.Ask<string>("Product's name:");
+            product.Price = AnsiConsole.Ask<decimal>("Product's price:");
+            ProductController.AddProduct(product);
         }
 
 		internal static void DeleteProduct()
@@ -46,8 +48,15 @@ namespace CoffeeShop.EntityFramework
 		internal static void UpdateProduct()
 		{
 			var product = GetProductOptionInput();
-			product.Name = AnsiConsole.Ask<string>("What is the product's new name:");
-			ProductController.UpdateProduct(product);
+
+			product.Name = AnsiConsole.Confirm("Update name?") ?
+				AnsiConsole.Ask<string>("What is the product's new name:")
+				: product.Name;
+
+            product.Price = AnsiConsole.Confirm("Update price?") ?
+                AnsiConsole.Ask<decimal>("What is the product's new price:")
+                : product.Price;
+            ProductController.UpdateProduct(product);
 		}
 	}
 }
