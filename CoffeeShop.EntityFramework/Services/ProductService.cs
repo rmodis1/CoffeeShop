@@ -1,4 +1,5 @@
 ﻿using System;
+using CoffeeShop.EntityFramework.Services;
 using Spectre.Console;
 
 namespace CoffeeShop.EntityFramework
@@ -10,6 +11,7 @@ namespace CoffeeShop.EntityFramework
 			var product = new Product();
             product.Name = AnsiConsole.Ask<string>("Product's name:");
             product.Price = AnsiConsole.Ask<decimal>("Product's price:");
+			product.CategoryId = CategoryService.GetCategoryOptionInput();
             ProductController.AddProduct(product);
         }
 
@@ -27,7 +29,7 @@ namespace CoffeeShop.EntityFramework
 			var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
 				.Title("Choose Product")
 				.AddChoices(productsArray));
-			var id = products.SingleOrDefault(x => x.Name == option).Id;
+			var id = products.SingleOrDefault(x => x.Name == option).ProductId;
 			var product = ProductController.ViewProduct(id);
 
 			return product;

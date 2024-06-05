@@ -1,0 +1,8 @@
+﻿{
+  "profiles": {
+    "CoffeeShop.PointOfSale.EntityFramework": {
+      "commandName": "Project",
+      "workingDirectory": "/Users/ryanmodisette/Documents/C#/Academy/CoffeeShop/CoffeeShop.EntityFramework/CoffeeShop.EntityFramework"
+    }
+}
+
