@@ -15,61 +15,112 @@ namespace CoffeeShop.EntityFramework
             {
                 Console.Clear();
                 var option = AnsiConsole.Prompt(
-                new SelectionPrompt<MenuOptions>()
+                new SelectionPrompt<MainMenuOptions>()
                 .Title("What woud you like to do?")
                 .AddChoices(
-                    MenuOptions.AddCategory,
-                    MenuOptions.DeleteCategory,
-                    MenuOptions.UpdateCategory,
-                    MenuOptions.ViewCategory,
-                    MenuOptions.ViewAllCategories,
-                    MenuOptions.AddProduct,
-                    MenuOptions.DeleteProduct,
-                    MenuOptions.UpdateProduct,
-                    MenuOptions.ViewAllProducts,
-                    MenuOptions.ViewProduct,
-                    MenuOptions.Quit));
+                    MainMenuOptions.ManageCategories,
+                    MainMenuOptions.ManageProducts,
+                    MainMenuOptions.Quit));
 
                 switch (option)
                 {
-                    case MenuOptions.AddCategory:
-                        CategoryService.InsertCategory();
+                    case MainMenuOptions.ManageCategories:
+                        CategoryMenu();
                         break;
-                    case MenuOptions.DeleteCategory:
-                        CategoryService.DeleteCategory();
+                    case MainMenuOptions.ManageProducts:
+                        ProductMenu();
                         break;
-                    case MenuOptions.UpdateCategory:
-                        CategoryService.UpdateCategory();
-                        break;
-                    case MenuOptions.ViewCategory:
-                        CategoryService.GetCategory();
-                        break;
-                    case MenuOptions.ViewAllCategories:
-                        CategoryService.GetCategories();
-                        break;
-                    case MenuOptions.AddProduct:
-                        ProductService.InsertProduct();
-                        break;
-                    case MenuOptions.DeleteProduct:
-                        ProductService.DeleteProduct();
-                        break;
-                    case MenuOptions.UpdateProduct:
-                        ProductService.UpdateProduct();
-                        break;
-                    case MenuOptions.ViewProduct:
-                        ProductService.GetProduct();
-                        break;
-                    case MenuOptions.ViewAllProducts:
-                        ProductService.GetProducts();
-                        break;
-                    case MenuOptions.Quit:
-                        Environment.Exit(0);
+                    case MainMenuOptions.Quit:
+                        Console.WriteLine("Goodbye");
+                        isAppRunning = false;
                         break;
                 }
             }
         }
 
-		internal static void ShowProductTable(List<Product> products)
+        internal static void CategoryMenu()
+        {
+            bool isCategoriesMenuRunning = true;
+            while (isCategoriesMenuRunning)
+            {
+                Console.Clear();
+                var option = AnsiConsole.Prompt(
+                new SelectionPrompt<CategoriesMenu>()
+                .Title("Categories Menu")
+                .AddChoices(
+                    CategoriesMenu.AddCategory,
+                    CategoriesMenu.DeleteCategory,
+                    CategoriesMenu.UpdateCategory,
+                    CategoriesMenu.ViewCategory,
+                    CategoriesMenu.ViewAllCategories,
+                    CategoriesMenu.GoBack));
+
+                switch (option)
+                {
+                    case CategoriesMenu.AddCategory:
+                        CategoryService.InsertCategory();
+                        break;
+                    case CategoriesMenu.DeleteCategory:
+                        CategoryService.DeleteCategory();
+                        break;
+                    case CategoriesMenu.UpdateCategory:
+                        CategoryService.UpdateCategory();
+                        break;
+                    case CategoriesMenu.ViewCategory:
+                        CategoryService.GetCategory();
+                        break;
+                    case CategoriesMenu.ViewAllCategories:
+                        CategoryService.GetCategories();
+                        break;
+                    case CategoriesMenu.GoBack:
+                        isCategoriesMenuRunning = false;
+                        break;
+                }
+            }
+        }
+
+        internal static void ProductMenu()
+        {
+                bool isProductsMenuRunning = true;
+                while (isProductsMenuRunning)
+                {
+                    Console.Clear();
+                    var option = AnsiConsole.Prompt(
+                    new SelectionPrompt<ProductsMenu>()
+                    .Title("Products Menu")
+                    .AddChoices(
+                        ProductsMenu.AddProduct,
+                        ProductsMenu.DeleteProduct,
+                        ProductsMenu.UpdateProduct,
+                        ProductsMenu.ViewProduct,
+                        ProductsMenu.ViewAllProducts,
+                        ProductsMenu.GoBack));
+
+                switch (option)
+                {
+                    case ProductsMenu.AddProduct:
+                        ProductService.InsertProduct();
+                        break;
+                    case ProductsMenu.DeleteProduct:
+                        ProductService.DeleteProduct();
+                        break;
+                    case ProductsMenu.UpdateProduct:
+                        ProductService.UpdateProduct();
+                        break;
+                    case ProductsMenu.ViewProduct:
+                        ProductService.GetProduct();
+                        break;
+                    case ProductsMenu.ViewAllProducts:
+                        ProductService.GetProducts();
+                        break;
+                    case ProductsMenu.GoBack:
+                        isProductsMenuRunning = false;
+                        break;
+                }
+            }
+        }
+
+        internal static void ShowProductTable(List<Product> products)
 		{
 			var table = new Table();
 			table.AddColumn("Id");

@@ -3,19 +3,31 @@ namespace CoffeeShop.EntityFramework
 {
 	public class Enums
 	{
-        internal enum MenuOptions
+        internal enum MainMenuOptions
+        {
+            ManageCategories,
+            ManageProducts,
+            Quit
+        }
+
+        internal enum CategoriesMenu
         {
             AddCategory,
             DeleteCategory,
             UpdateCategory,
             ViewCategory,
             ViewAllCategories,
+            GoBack
+        }
+
+        internal enum ProductsMenu
+        {
             AddProduct,
             DeleteProduct,
             UpdateProduct,
             ViewProduct,
             ViewAllProducts,
-            Quit
+            GoBack
         }
     }
 }
