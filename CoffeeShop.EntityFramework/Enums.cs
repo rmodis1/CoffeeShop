@@ -6,6 +6,8 @@ namespace CoffeeShop.EntityFramework
         internal enum MenuOptions
         {
             AddCategory,
+            DeleteCategory,
+            UpdateCategory,
             ViewAllCategories,
             AddProduct,
             DeleteProduct,

@@ -19,17 +19,26 @@ namespace CoffeeShop.EntityFramework
                 .Title("What woud you like to do?")
                 .AddChoices(
                     MenuOptions.AddCategory,
+                    MenuOptions.DeleteCategory,
+                    MenuOptions.UpdateCategory,
                     MenuOptions.ViewAllCategories,
                     MenuOptions.AddProduct,
                     MenuOptions.DeleteProduct,
                     MenuOptions.UpdateProduct,
                     MenuOptions.ViewAllProducts,
-                    MenuOptions.ViewProduct));
+                    MenuOptions.ViewProduct,
+                    MenuOptions.Quit));
 
                 switch (option)
                 {
                     case MenuOptions.AddCategory:
                         CategoryService.InsertCategory();
+                        break;
+                    case MenuOptions.DeleteCategory:
+                        CategoryService.DeleteCategory();
+                        break;
+                    case MenuOptions.UpdateCategory:
+                        CategoryService.UpdateCategory();
                         break;
                     case MenuOptions.ViewAllCategories:
                         CategoryService.GetCategories();
@@ -48,6 +57,9 @@ namespace CoffeeShop.EntityFramework
                         break;
                     case MenuOptions.ViewAllProducts:
                         ProductService.GetProducts();
+                        break;
+                    case MenuOptions.Quit:
+                        Environment.Exit(0);
                         break;
                 }
             }

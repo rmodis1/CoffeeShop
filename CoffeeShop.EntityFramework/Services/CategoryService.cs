@@ -21,7 +21,7 @@ namespace CoffeeShop.EntityFramework.Services
 			UserInterface.ShowCategoryTable(categories);
 		}
 
-        static internal int GetCategoryOptionInput()
+        static internal Category GetCategoryOptionInput()
         {
             var categories = CategoryController.GetCategories();
             var categoriesArray = categories.Select(x => x.Name).ToArray();
@@ -29,9 +29,26 @@ namespace CoffeeShop.EntityFramework.Services
             var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("Choose Category")
                 .AddChoices(categoriesArray));
-            var id = categories.SingleOrDefault(x => x.Name == option).CategoryId;
+            var category = categories.SingleOrDefault(x => x.Name == option);
      
-            return id;
+            return category;
+        }
+
+        internal static void DeleteCategory()
+        {
+            var category = GetCategoryOptionInput();
+            CategoryController.DeleteCategory(category);
+        }
+
+        internal static void UpdateCategory()
+        {
+            var category = GetCategoryOptionInput();
+
+            category.Name = AnsiConsole.Confirm("Update name?") ?
+                AnsiConsole.Ask<string>("What is the category's new name:")
+                : category.Name;
+
+            CategoryController.UpdateCategory(category);
         }
     }
 }
