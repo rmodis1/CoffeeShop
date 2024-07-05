@@ -20,6 +20,7 @@ namespace CoffeeShop.EntityFramework
                 .AddChoices(
                     MainMenuOptions.ManageCategories,
                     MainMenuOptions.ManageProducts,
+                    MainMenuOptions.ManageOrders,
                     MainMenuOptions.Quit));
 
                 switch (option)
@@ -29,6 +30,9 @@ namespace CoffeeShop.EntityFramework
                         break;
                     case MainMenuOptions.ManageProducts:
                         ProductMenu();
+                        break;
+                    case MainMenuOptions.ManageOrders:
+                        OrderMenu();
                         break;
                     case MainMenuOptions.Quit:
                         Console.WriteLine("Goodbye");
@@ -120,28 +124,52 @@ namespace CoffeeShop.EntityFramework
             }
         }
 
+        internal static void OrderMenu()
+        {
+            bool isOrderMenuRunning = true;
+            while (isOrderMenuRunning)
+            {
+                Console.Clear();
+                var option = AnsiConsole.Prompt(
+                new SelectionPrompt<OrdersMenu>()
+                .Title("Orders Menu")
+                .AddChoices(
+                    OrdersMenu.AddOrder,
+                    OrdersMenu.GoBack));
+
+                switch (option)
+                {
+                    case OrdersMenu.AddOrder:
+                        OrderService.InsertOrder();
+                        break;
+                    case OrdersMenu.GoBack:
+                        isOrderMenuRunning = false;
+                        break;
+                }
+        }
+
         internal static void ShowProductTable(List<Product> products)
 		{
-			var table = new Table();
-			table.AddColumn("Id");
-			table.AddColumn("Name");
-			table.AddColumn("Price");
+		    var table = new Table();
+		    table.AddColumn("Id");
+		    table.AddColumn("Name");
+		    table.AddColumn("Price");
             table.AddColumn("Category");
 
-			foreach (var product in products)
-			{
-				table.AddRow(
-					product.ProductId.ToString(),
-					product.Name,
-					product.Price.ToString(),
+		    foreach (var product in products)
+		    {
+			    table.AddRow(
+				    product.ProductId.ToString(),
+				    product.Name,
+				    product.Price.ToString(),
                     product.Category.Name
                     );
-			}
+		    }
 
-			AnsiConsole.Write(table);
-			Console.WriteLine("Enter any key to continue");
-			Console.ReadLine();
-			Console.Clear();
+		    AnsiConsole.Write(table);
+		    Console.WriteLine("Enter any key to continue");
+		    Console.ReadLine();
+		    Console.Clear();
 		}
 
         internal static void ShowProduct(Product product)
