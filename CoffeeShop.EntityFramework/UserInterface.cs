@@ -21,6 +21,7 @@ namespace CoffeeShop.EntityFramework
                     MenuOptions.AddCategory,
                     MenuOptions.DeleteCategory,
                     MenuOptions.UpdateCategory,
+                    MenuOptions.ViewCategory,
                     MenuOptions.ViewAllCategories,
                     MenuOptions.AddProduct,
                     MenuOptions.DeleteProduct,
@@ -39,6 +40,9 @@ namespace CoffeeShop.EntityFramework
                         break;
                     case MenuOptions.UpdateCategory:
                         CategoryService.UpdateCategory();
+                        break;
+                    case MenuOptions.ViewCategory:
+                        CategoryService.GetCategory();
                         break;
                     case MenuOptions.ViewAllCategories:
                         CategoryService.GetCategories();
@@ -81,7 +85,6 @@ namespace CoffeeShop.EntityFramework
 					product.Price.ToString(),
                     product.Category.Name
                     );
-                    
 			}
 
 			AnsiConsole.Write(table);
@@ -93,7 +96,7 @@ namespace CoffeeShop.EntityFramework
         internal static void ShowProduct(Product product)
         {
 			var panel = new Panel($"Id: {product.ProductId}, " +
-				$"Name: {product.Name}" +
+				$"Name: {product.Name}, " +
                 $"Category: {product.Category.Name}");
 			panel.Header = new PanelHeader("Product Info");
 			panel.Padding = new Padding(2, 2, 2, 2);
@@ -124,6 +127,22 @@ namespace CoffeeShop.EntityFramework
             Console.ReadLine();
             Console.Clear();
         }
-	}
+
+        internal static void ShowCategory(Category category)
+        {
+            var panel = new Panel($"Id: {category.CategoryId}, " +
+                $"Name: {category.Name}, " +
+                $"Product Count: {category.Products.Count}");
+            panel.Header = new PanelHeader($"{category.Name}");
+            panel.Padding = new Padding(2, 2, 2, 2);
+
+            AnsiConsole.Write(panel);
+
+            ShowProductTable(category.Products);
+            Console.WriteLine("Enter any key to continue");
+            Console.ReadLine();
+            Console.Clear();
+        }
+    }
 }
 

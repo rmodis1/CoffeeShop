@@ -8,6 +8,7 @@ namespace CoffeeShop.EntityFramework
             AddCategory,
             DeleteCategory,
             UpdateCategory,
+            ViewCategory,
             ViewAllCategories,
             AddProduct,
             DeleteProduct,

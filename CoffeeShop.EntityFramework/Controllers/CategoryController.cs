@@ -1,5 +1,6 @@
 ﻿using System;
 using CoffeeShop.EntityFramework.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.EntityFramework.Controllers
 {
@@ -23,7 +24,9 @@ namespace CoffeeShop.EntityFramework.Controllers
 		{
 			using var db = new ProductContext();
 
-			var categories = db.Categories.ToList();
+			var categories = db.Categories
+				.Include(x => x.Products)
+				.ToList();
 
 			return categories;
 		}
