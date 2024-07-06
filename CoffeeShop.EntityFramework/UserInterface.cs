@@ -146,6 +146,7 @@ namespace CoffeeShop.EntityFramework
                         isOrderMenuRunning = false;
                         break;
                 }
+            }
         }
 
         internal static void ShowProductTable(List<Product> products)
