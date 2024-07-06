@@ -34,6 +34,8 @@ namespace CoffeeShop.EntityFramework
         internal enum OrdersMenu
         {
             AddOrder,
+            GetOrders,
+            GetOrder,
             GoBack
         }
     }
