@@ -23,6 +23,7 @@
     <None Remove="Services\" />
     <None Remove="Properties\" />
     <None Remove="Models\DTOs\" />
+    <None Remove="UserInterface\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -30,5 +31,6 @@
     <Folder Include="Services\" />
     <Folder Include="Properties\" />
     <Folder Include="Models\DTOs\" />
+    <Folder Include="UserInterface\" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System;
 using CoffeeShop.EntityFramework.Controllers;
 using CoffeeShop.EntityFramework.Models;
+using CoffeeShop.EntityFramework.UserInterface;
 using Spectre.Console;
 
 namespace CoffeeShop.EntityFramework.Services
@@ -18,13 +19,13 @@ namespace CoffeeShop.EntityFramework.Services
 		internal static void GetCategories()
 		{
 			var categories = CategoryController.GetCategories();
-			UserInterface.ShowCategoryTable(categories);
+			CategoryView.ShowCategoryTable(categories);
 		}
 
         internal static void GetCategory()
         {
             var category = GetCategoryOptionInput();
-            UserInterface.ShowCategory(category);
+            CategoryView.ShowCategory(category);
         }
 
         static internal Category GetCategoryOptionInput()

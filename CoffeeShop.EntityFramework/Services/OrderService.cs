@@ -2,6 +2,7 @@
 using CoffeeShop.EntityFramework.Controllers;
 using CoffeeShop.EntityFramework.Models;
 using CoffeeShop.EntityFramework.Models.DTOs;
+using CoffeeShop.EntityFramework.UserInterface;
 using Spectre.Console;
 
 namespace CoffeeShop.EntityFramework.Services
@@ -48,7 +49,7 @@ namespace CoffeeShop.EntityFramework.Services
         {
             var orders = OrderController.GetOrders();
 
-            UserInterface.ShowOrderTable(orders);
+            OrderView.ShowOrderTable(orders);
         }
 
         internal static void GetOrder()
@@ -65,8 +66,8 @@ namespace CoffeeShop.EntityFramework.Services
                     TotalPrice = x.Quantity * x.Product.Price
                 }).ToList();
 
-            UserInterface.ShowOrder(order);
-            UserInterface.ShowProductForOrderTable(products);
+            OrderView.ShowOrder(order);
+            OrderView.ShowProductForOrderTable(products);
         }
 
         private static Order GetOrderOptionInput()

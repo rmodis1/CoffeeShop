@@ -1,6 +1,7 @@
 ﻿using System;
 using CoffeeShop.EntityFramework.Models;
 using CoffeeShop.EntityFramework.Services;
+using CoffeeShop.EntityFramework.UserInterface;
 using Spectre.Console;
 
 namespace CoffeeShop.EntityFramework
@@ -39,13 +40,13 @@ namespace CoffeeShop.EntityFramework
 		internal static void GetProduct()
 		{
             var product = GetProductOptionInput();
-            UserInterface.ShowProduct(product);
+            ProductView.ShowProduct(product);
         }
 
 		internal static void GetProducts()
 		{
             var products = ProductController.ViewAllProducts();
-            UserInterface.ShowProductTable(products);
+            ProductView.ShowProductTable(products);
         }
 
 		internal static void UpdateProduct()
