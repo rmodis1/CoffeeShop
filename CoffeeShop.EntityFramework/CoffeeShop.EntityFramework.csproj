@@ -24,6 +24,8 @@
     <None Remove="Properties\" />
     <None Remove="Models\DTOs\" />
     <None Remove="UserInterface\" />
+    <None Remove="UserInterface\Menus\" />
+    <None Remove="UserInterface\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -32,5 +34,7 @@
     <Folder Include="Properties\" />
     <Folder Include="Models\DTOs\" />
     <Folder Include="UserInterface\" />
+    <Folder Include="UserInterface\Menus\" />
+    <Folder Include="UserInterface\Views\" />
   </ItemGroup>
 </Project>
